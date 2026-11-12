@@ -28,7 +28,7 @@ input.sr{width:100%;background:#170E24;border:1px solid var(--line);border-radiu
 .dia{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:8px;display:flex;gap:12px;align-items:center}.dia img{width:44px;border-radius:4px}.dia small{color:var(--mut)}
 .foot{text-align:center;font-size:12px;color:#8a7a9e;margin-top:30px}
 @media(max-width:520px){.ts{grid-template-columns:1fr}}
-</style></head><body>
+.upg{display:block;margin:14px auto 0;max-width:340px;border-radius:14px;padding:15px 18px;font:700 15px Jo,system-ui,sans-serif;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;text-align:center;color:#1d1305;background:linear-gradient(180deg,#EED08A,#BF9441);box-shadow:0 6px 0 #6b4f1a}</style></head><body>
 <div class="top"><div class="eyb">✦ Tarô de Bolso ✦</div><h1>Pergunte <em>às cartas</em></h1><p>Pense na sua pergunta, embaralhe e vire as cartas. Cada carta vem com o significado, o recado para a sua pergunta e o conselho.</p></div>
 <div class="wrap"><div class="tabs" id="tabs"></div><div id="v"></div>
 <p class="foot">Baralho Rider-Waite-Smith (Pamela Colman Smith e A. E. Waite, 1909), em domínio público. O tarô é uma ferramenta de reflexão e autoconhecimento. Não prevê o futuro e não substitui orientação médica, jurídica ou financeira.</p></div>
@@ -142,7 +142,7 @@ const rnd=n=>{const a=new Uint32Array(1);crypto.getRandomValues(a);return a[0]%n
 function embaralha(n){const p=CARTAS.map((_,i)=>i);for(let i=p.length-1;i>0;i--){const j=rnd(i+1);[p[i],p[j]]=[p[j],p[i]]}return p.slice(0,n).map(i=>CARTAS[i])}
 let diario=[];try{diario=JSON.parse(localStorage.getItem('taro_diario')||'[]')}catch(_){}
 const salva=()=>{try{localStorage.setItem('taro_diario',JSON.stringify(diario.slice(0,60)))}catch(_){}};
-function tirar(k){const T=TIRAGENS[k];if(T.pro&&!PRO)return;
+function tirar(k){const T=TIRAGENS[k];if(T.pro&&!PRO){window.open(window.__UPG,'_blank');return}
  V.innerHTML=`<h2>${T.nm}</h2><p class="lead">${T.d}</p><textarea id="pq" placeholder="Escreva a sua pergunta (opcional)"></textarea><button class="btn" onclick="mesa('${k}')">Embaralhar e tirar ${T.n>1?T.n+' cartas':'a carta'}</button><button class="btn ghost" onclick="go('Tiragens')">Voltar</button>`}
 function mesa(k){const T=TIRAGENS[k],pq=(document.getElementById('pq')||{}).value||'',cs=embaralha(T.n);
  V.innerHTML=`<h2>${T.nm}</h2>${pq?`<p class="lead">"${esc(pq)}"</p>`:''}<p class="lead">Toque em cada carta para virar.</p><div class="mesa">${cs.map((c,i)=>`<div class="c n${T.n===1?1:T.n===10?10:''}" onclick="vira(this)"><div class="ci"><div class="v">✦</div><div class="f"><img src="${c.img}" alt=""></div></div><small>${i+1}. ${T.pos[i]}</small></div>`).join('')}</div><div id="ler"></div>`;
@@ -164,4 +164,4 @@ const VIEWS={
 let cur='Tiragens';const tabs=document.getElementById('tabs');
 function go(k){cur=k;tabs.innerHTML=Object.keys(VIEWS).map(x=>`<button class="tab ${x===cur?'on':''}" onclick="go('${x}')">${x}</button>`).join('');V.innerHTML=VIEWS[k]();scrollTo({top:0})}
 go('Tiragens');
-</script></body></html>
+</script><script>(function(){var U='https://pay.cakto.com.br/dqhtowi_1313717';function add(){document.querySelectorAll('.lock').forEach(function(l){if(l.querySelector('.upg'))return;var a=document.createElement('a');a.className='upg';a.href=U;a.target='_blank';a.rel='noopener';a.textContent='Quero o Tarô Completo';l.appendChild(a)})}add();new MutationObserver(add).observe(document.body,{childList:true,subtree:true});window.__UPG=U;})();</script></body></html>
